@@ -4,6 +4,7 @@ import { GlazeButton } from "@/components/glaze-button"
 import Logo from "@/assets/logo-w.png"
 import { auth } from "@clerk/nextjs/server"
 import Link from "next/link"
+import { UserButton } from "@clerk/nextjs"
 
 export const Header = async () => {
   const { userId, redirectToSignIn } = await auth()
@@ -16,36 +17,25 @@ export const Header = async () => {
           <div>
             {/* To make the border of the Logo inline-flex to make it in center aligfned with Logo */}
             <div className="border h-10 w-28 rounded-xl border-white/15 inline-flex justify-center items-center mr-10">
-              <img src={Logo.src} />{" "}
+              <img src={Logo.src} />
             </div>
           </div>
-          <div className="hidden md:block">
-            <nav className="flex gap-8 text-sm ">
-              <a
-                className="text-white/70 hover:text-white transition "
-                href="#"
-              >
-                Developers
-              </a>
-              <a
-                className="text-white/70 hover:text-white transition "
-                href="#"
-              >
-                Pricing
-              </a>
-              <a
-                className="text-white/70 hover:text-white transition "
-                href="#"
-              >
-                Changelog
-              </a>
-            </nav>
+          <div className="gap-4 items-center hidden md:block">
+            <Link href="/">Home </Link>
+          </div>
+
+          <div className=" items-center">
+            <Link href="/student">
+              <Button text="Attend Test" />
+            </Link>
           </div>
           <div className="flex gap-4 items-center">
-            <Link href={userId ? "/dashboard" : "/sign-up"}>
-              <Button />
+            <Link href="/admin">
+              <Button text="Create Test" />
             </Link>
-            <MenuIcon className="md:hidden" />
+          </div>
+          <div>
+            <UserButton />
           </div>
         </div>
       </div>
