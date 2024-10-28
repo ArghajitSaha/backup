@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { useForm, useFieldArray } from 'react-hook-form';
+import axios from 'axios';
 
 const CreateTestPage = () => {
   const { register, control, handleSubmit, watch, setValue } = useForm({
@@ -43,19 +44,20 @@ const CreateTestPage = () => {
   };
 
   const onSubmit = async (data) => {
-    console.log(data); // Log the filled data
+    console.log(data);
     if (!data.testName || data.questions.length === 0) {
       toast.error('Please provide a test name and upload questions.');
       return;
     }
     try {
-      const response = await fetch('/api/tests', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-      if (response.ok) {
+      const response = await axios.post('http://localhost:5000/api/tests', data);
+      if (response.status === 201) {
         toast.success('Test created successfully!');
+        console.log('Test created successfully:', response.data);
+  
+        // Display or navigate to the test link
+        const testLink = response.data.link;
+        setTestLink(testLink); // Set link in state for UI display
       } else {
         toast.error('Error creating test. Please try again.');
       }
@@ -64,6 +66,8 @@ const CreateTestPage = () => {
       toast.error('Error connecting to server.');
     }
   };
+  
+  
 
   const handleDragEnd = (result) => {
     if (!result.destination) return;

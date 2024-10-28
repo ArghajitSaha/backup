@@ -1,15 +1,14 @@
 import mongoose from 'mongoose';
-
 // Connect to MongoDB
 const connectToDatabase = async () => {
-  if (mongoose.connection.readyState === 0) {
-    await mongoose.connect('mongodb://localhost:27017/excelitest', {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+  try {
+    const conn = await mongoose.connect('mongodb://localhost:27017/excelitest');
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
+  } catch (error) {
+    console.error(`Error: ${error.message}`);
+    process.exit(1);
   }
 };
-
 // Define a Mongoose schema for tests
 const TestSchema = new mongoose.Schema({
   testName: { type: String, required: true },
@@ -33,26 +32,26 @@ const TestSchema = new mongoose.Schema({
 const Test = mongoose.models.Test || mongoose.model('Test', TestSchema);
 
 // API Handler
-export default async function handler(request, response) {
+export default async function handler(req, res) {
   await connectToDatabase();
 
-  if (request.method === 'POST') {
+  if (req.method === 'POST') {
     try {
-      // Create a new test document with data from the request body
-      const newTest = new Test(request.body);
+      // Create a new test document with data from the req body
+      const newTest = new Test(req.body);
 
       // Save the document to MongoDB
       const savedTest = await newTest.save();
 
-      // Send a response with the saved document
-      response.status(201).json({ message: 'Test created successfully', test: savedTest });
+      // Send a res with the saved document
+      res.status(201).json({ message: 'Test created successfully', test: savedTest });
     } catch (error) {
       console.error(error);
-      response.status(500).json({ message: 'Error creating test', error });
+      res.status(500).json({ message: 'Error creating test', error });
     }
   } else {
     // Method not allowed
-    response.setHeader('Allow', ['POST']);
-    response.status(405).end(`Method ${request.method} Not Allowed`);
+    res.setHeader('Allow', ['POST']);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }

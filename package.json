@@ -11,6 +11,8 @@
   "dependencies": {
     "@dotlottie/react-player": "^1.6.19",
     "@lottiefiles/dotlottie-react": "^0.7.2",
+    "axios": "^1.7.7",
+    "cors": "^2.8.5",
     "framer-motion": "^11.3.2",
     "mongoose": "^8.7.3",
     "next": "14.2.5",

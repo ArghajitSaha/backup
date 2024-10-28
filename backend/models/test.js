@@ -1,47 +1,22 @@
 const mongoose = require('mongoose');
-const testSchema = new mongoose.Schema({
-    name: {
-      type: String,
-      required: true,
-    },
-    creator: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: false,
-    },
-    timeLimit: {
-      type: Number,  // in minutes
-      default: 60,
-    },
-    questions: [{
-      questionText: {
-        type: String,
-        required: true,
-      },
-      options: {
-        A: String,
-        B: String,
-        C: String,
-        D: String,
-      },
-      correctAnswer: {
-        type: String,
-        required: true,
-        enum: ['A', 'B', 'C', 'D'],
-      },
-      marks: {
-        type: Number,
-        default: 1,
-      }
-    }],
-    createdAt: {
-      type: Date,
-      default: Date.now,
-    },
-    isActive: {
-      type: Boolean,
-      default: true,
-    }
-  });
 
-const Test = mongoose.model('Test', testSchema);
-module.exports.Test = Test;
+// Define a Mongoose schema for tests
+const TestSchema = new mongoose.Schema({
+  testName: { type: String, required: true },
+  numberOfAttempts: { type: Number, required: true },
+  questionRandomization: { type: Boolean, default: false },
+  testAccessPeriod: { type: String, required: true },
+  questions: [
+    {
+      QuestionText: { type: String, required: true },
+      OptionA: { type: String, required: true },
+      OptionB: { type: String, required: true },
+      OptionC: { type: String, required: true },
+      OptionD: { type: String, required: true },
+      CorrectAnswer: { type: String, required: true },
+      Marks: { type: Number, required: true },
+    },
+  ],
+});
+
+module.exports = mongoose.model('Test', TestSchema);
