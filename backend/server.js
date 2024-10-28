@@ -30,7 +30,39 @@ app.post('/api/tests', async (req, res) => {
     }
   });
   
-
+// Add this to your Express server routes
+app.get('/api/tests/:testId', async (req, res) => {
+    try {
+      const test = await Test.findById(req.params.testId);
+      if (!test) return res.status(404).json({ message: 'Test not found' });
+      res.json({ test });
+    } catch (error) {
+      console.error('Error fetching test:', error);
+      res.status(500).json({ message: 'Server error' });
+    }
+  });
+// Add this route to handle test submission
+app.post('/api/tests/:testId/submit', async (req, res) => {
+    const { answers } = req.body;
+  
+    try {
+      const test = await Test.findById(req.params.testId);
+      if (!test) return res.status(404).json({ message: 'Test not found' });
+  
+      let score = 0;
+      test.questions.forEach((question, index) => {
+        if (answers[index] === question.CorrectAnswer) {
+          score += question.Marks;
+        }
+      });
+  
+      res.json({ message: 'Test submitted successfully', score });
+    } catch (error) {
+      console.error('Error submitting test:', error);
+      res.status(500).json({ message: 'Server error' });
+    }
+  });
+    
 // Root Route
 app.get('/', (req, res) => {
   res.send(`Server is running on port ${PORT}`);

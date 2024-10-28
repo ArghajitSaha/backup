@@ -9,6 +9,7 @@ import { useForm, useFieldArray } from 'react-hook-form';
 import axios from 'axios';
 
 const CreateTestPage = () => {
+  const [testLink, setTestLink] = useState("");
   const { register, control, handleSubmit, watch, setValue } = useForm({
     defaultValues: {
       testName: '',
@@ -136,6 +137,12 @@ const CreateTestPage = () => {
           <ToastContainer />
         </form>
       </div>
+      {testLink && (
+          <div className='bg-black'>
+            <p>Your test is ready! You can attempt it here:</p>
+            <a href={testLink} target="_blank" rel="noopener noreferrer">{testLink}</a>
+          </div>
+        )}
 
       <div className="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-md mb-6">
         <h2 className="text-4xl font-bold text-gray-800 text-center mb-6">Upload Questions</h2>

@@ -20,6 +20,7 @@
     "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18",
     "react-hook-form": "^7.53.1",
+    "react-hot-toast": "^2.4.1",
     "react-toastify": "^10.0.6",
     "tailwind-merge": "^2.4.0",
     "xlsx": "^0.18.5"
