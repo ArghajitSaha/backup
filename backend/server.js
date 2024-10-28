@@ -254,7 +254,7 @@ app.get('/api/tests/:testId/results', async (req, res) => {
   // Assuming you're using authentication to get the user's ID
   try {
     const result = await TestResult.findOne({
-      testId: req.params.testId
+      testId: req.params.testId,
       // userId: userId,
     }).populate('testId', 'testName Duration Subject'); // Optionally populate test details
 
