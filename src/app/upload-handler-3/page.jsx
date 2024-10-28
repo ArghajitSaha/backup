@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import * as XLSX from 'xlsx';
 import { ToastContainer, toast } from 'react-toastify';
+import TestShareCard from '../upload-handler/page';
 import 'react-toastify/dist/ReactToastify.css';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { useForm, useFieldArray } from 'react-hook-form';
@@ -10,6 +11,8 @@ import axios from 'axios';
 
 const CreateTestPage = () => {
   const [testLink, setTestLink] = useState("");
+  const [testCode, setTestCode] = useState("");
+
   const { register, control, handleSubmit, watch, setValue } = useForm({
     defaultValues: {
       testName: '',
@@ -58,6 +61,7 @@ const CreateTestPage = () => {
   
         // Display or navigate to the test link
         const testLink = response.data.link;
+        setTestCode(response.data.code); // Assuming your API returns a code
         setTestLink(testLink); // Set link in state for UI display
       } else {
         toast.error('Error creating test. Please try again.');
@@ -137,12 +141,11 @@ const CreateTestPage = () => {
           <ToastContainer />
         </form>
       </div>
-      {testLink && (
-          <div className='bg-black'>
-            <p>Your test is ready! You can attempt it here:</p>
-            <a href={testLink} target="_blank" rel="noopener noreferrer">{testLink}</a>
-          </div>
-        )}
+      {(testLink && testCode) && (
+        <TestShareCard 
+          testLink={testLink}
+          testCode={testCode}
+      />)}
 
       <div className="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-md mb-6">
         <h2 className="text-4xl font-bold text-gray-800 text-center mb-6">Upload Questions</h2>
