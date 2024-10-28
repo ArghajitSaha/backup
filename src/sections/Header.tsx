@@ -1,10 +1,12 @@
-import LogoIcon from "@/assets/logo.svg"
 import MenuIcon from "@/assets/icon-menu.svg"
 import { Button } from "@/components/button"
 import { GlazeButton } from "@/components/glaze-button"
 import Logo from "@/assets/logo-w.png"
+import { auth } from "@clerk/nextjs/server"
+import Link from "next/link"
 
-export const Header = () => {
+export const Header = async () => {
+  const { userId, redirectToSignIn } = await auth()
   return (
     <header className="py-4 border-b border-white/15 md:border-none sticky top-0 z-10 ">
       <div className="absolute inset-0 backdrop-blur -z-10 md:hidden"></div>
@@ -40,7 +42,9 @@ export const Header = () => {
             </nav>
           </div>
           <div className="flex gap-4 items-center">
-            <GlazeButton />
+            <Link href={userId ? "/dashboard" : "/sign-up"}>
+              <Button />
+            </Link>
             <MenuIcon className="md:hidden" />
           </div>
         </div>

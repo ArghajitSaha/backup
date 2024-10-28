@@ -26,17 +26,15 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider
-      // appearance={{
-      //   baseTheme: [dark, neobrutalism],
-      //   variables: { colorPrimary: "blue" },
-      //   signIn: {
-      //     baseTheme: [shadesOfPurple],
-      //     variables: { colorPrimary:"yellow" },
-      //   },
-      // }}
+      //custom signin signup
       appearance={{
-        
+        baseTheme: [neobrutalism],
         signIn: { baseTheme: neobrutalism },
+        variables: {
+          colorText: "black",
+          colorBackground: "grey",
+          // colorTextSecondary:"white"
+        },
       }}
     >
       <html lang="en">
@@ -46,10 +44,6 @@ export default function RootLayout({
             "bg-black text-white antialiased"
           )}
         >
-          <SignedOut></SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
           {children}
         </body>
       </html>
