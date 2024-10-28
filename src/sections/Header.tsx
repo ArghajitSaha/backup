@@ -1,6 +1,8 @@
 import LogoIcon from "@/assets/logo.svg"
 import MenuIcon from "@/assets/icon-menu.svg"
 import { Button } from "@/components/button"
+import { GlazeButton } from "@/components/glaze-button"
+import Logo from "@/assets/logo-w.png"
 
 export const Header = () => {
   return (
@@ -11,18 +13,12 @@ export const Header = () => {
           <div className="hidden md:block absolute inset-0 backdrop-blur -z-10 "></div>
           <div>
             {/* To make the border of the Logo inline-flex to make it in center aligfned with Logo */}
-            <div className="border h-10 w-10 rounded-xl border-white/15 inline-flex justify-center items-center">
-              <LogoIcon className="h-8 w-8" />
+            <div className="border h-10 w-28 rounded-xl border-white/15 inline-flex justify-center items-center mr-10">
+              <img src={Logo.src} />{" "}
             </div>
           </div>
           <div className="hidden md:block">
             <nav className="flex gap-8 text-sm ">
-              <a
-                className="text-white/70 hover:text-white hover:y-10 transition "
-                href="#"
-              >
-                Features
-              </a>
               <a
                 className="text-white/70 hover:text-white transition "
                 href="#"
@@ -44,7 +40,7 @@ export const Header = () => {
             </nav>
           </div>
           <div className="flex gap-4 items-center">
-            <Button />
+            <GlazeButton />
             <MenuIcon className="md:hidden" />
           </div>
         </div>

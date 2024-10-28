@@ -1,7 +1,7 @@
 import Image from "next/image"
 import React from "react"
-import normal from "@/assets/2.webp"
-import hovere from "@/assets/1.webp"
+import normal from "@/assets/excel.png"
+import hovere from "@/assets/test.png"
 
 export const Cards = () => {
   return (
@@ -11,13 +11,13 @@ export const Cards = () => {
           <div className="relative">
             <div className="px-6 py-5">
               <div className="group-hover:bg-blue-400 bg-white transition-all duration-500 ease-in-out w-fit px-3 rounded-full text-sm py-1 text-black group-hover:text-white mb-1">
-                stastic
+                exclitest
               </div>
               <span className="text-lg group-hover:hidden inline-block font-semibold pt-2 text-slate-200 mb-1 transition-all duration-500 ease-in-out">
-                Subscriber Reports
+                From Excel File
               </span>
               <span className="text-lg group-hover:inline-block hidden font-semibold pt-2 text-slate-200 mb-1 transition-all duration-500 ease-in-out">
-                Subscriber Highlights
+                To Test Assignment
               </span>
               <p className="text-sm text-slate-500">
                 Building truly great products is both art and science. It's part

@@ -4,7 +4,7 @@ export const Button = () => {
       <div className="absolute inset-0">
         <div className="border rounded-lg border-white/20 absolute inset-0"></div>
       </div>
-      <span>Join Waitlist</span>
+      <span>Create Test</span>
     </button>
   )
 }

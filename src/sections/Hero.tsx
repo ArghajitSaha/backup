@@ -4,14 +4,13 @@ import Brain from "@/assets/brainstorming.png"
 import choice from "@/assets/choice.png"
 import rocket from "@/assets/innovation.png"
 import pro from "@/assets/pros-and-cons.png"
-import startup from "@/assets/stars.png"
-import logo from "@/assets/text-1730020118284.png"
 
 import { Button } from "@/components/button"
 import starsBg from "@/assets/stars.png"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { useRef } from "react"
 import Image from "next/image"
+import { GlazeButton } from "@/components/glaze-button"
 
 export const Hero = () => {
   //bg start animation with scroll for depth
@@ -46,7 +45,7 @@ export const Hero = () => {
       {/* shadow */}
       <div className="absolute inset-0 bg-[radial-gradient(75%_75%_at_center_center,rgb(140,69,255,.5)_15%,rgb(14,0,36,.5)_78%,transparent)]"></div>
       {/* THE BIG PURPLE PLANET */}
-      <div className="absolute h-16 w-[400px] lg:h-[150px] lg:w-[500px] bg-purple-500 rounded-full border border-white/20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(50%_50%_at_16.8%_18.3%,white,rgb(184,148,155)_37.7%,rgb(24,0,66))] shadow-[-20px_-20px_50px_rgb(255,255,255,.5),-20px_-20px_80px_rgb(255,255,255,.1),0_0_50px_rgb(140,69,255)]"></div>
+      <div className="absolute h-40 w-40 md:h-40 md:w-40  rounded-full  top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(50%_50%_at_16.8%_18.3%,white,rgb(184,18,155)_20.7%,rgb(24,0,66))] shadow-[-20px_-20px_50px_rgb(255,255,255,.5),-20px_-20px_80px_rgb(255,255,255,.1),0_0_50px_rgb(140,69,255)]"></div>
       {/* FIRST RING */}
       <motion.div
         //to cover the -translate-x,y-1/2
@@ -64,7 +63,7 @@ export const Hero = () => {
           repeat: Infinity,
           ease: "linear",
         }}
-        className="absolute h-[344px] w-[344px] lg:h-[640px] lg:w-[640px] rounded-full border border-white/20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 "
+        className="absolute h-[344px] w-[344px] lg:h-[640px] lg:w-[640px] rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 "
       >
         {/* PLANET on the ring left-0 top-1/2 */}
         <div className="absolute h-2 w-2  rounded-full bg-zinc-800 top-1/2 left-full -translate-x-1/2 -translate-y-1/2">
@@ -87,7 +86,7 @@ export const Hero = () => {
           repeat: Infinity,
           ease: "linear",
         }}
-        className="absolute h-[484px] w-[484px] lg:hidden rounded-full border border-white/20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+        className="absolute h-[484px] w-[484px]  rounded-full  top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
       >
         {/* PLANET on 2nd Ring */}
         <div className="absolute h-3 w-3 bg-zinc-800  rounded-full top-1/2 left-full -translate-x-1/2  -translate-y-1/2">
@@ -112,11 +111,14 @@ export const Hero = () => {
           ease: "linear",
           duration: 60,
         }}
-        className="absolute h-[699px] w-[699px]   lg:h-[800px] lg:w-[800px] border rounded-full border-white/20 border-dashed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 "
+        className="absolute h-[699px] w-[699px]   lg:h-[800px] lg:w-[800px]  rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 "
       >
         {/* PLANET on ring 3rd  ... cordinatest ir top an dleft through trial an error */}
-        <div className="absolute h-12 w-12 lg:h-4 lg:w-4 bg-slate-800 rounded-full top-1/4 left-9">
+        <div className="absolute h-12 w-12  bg-slate-800 rounded-full top-1/4 left-9">
           <img src={rocket.src} />
+        </div>
+        <div className="absolute h-12 w-12  bg-slate-800 rounded-full top-2/4 left-20">
+          <img src={choice.src} />
         </div>
       </motion.div>
       {/* 4th Ring */}
@@ -131,16 +133,13 @@ export const Hero = () => {
         transition={{
           repeat: Infinity,
           ease: "linear",
-          duration: 90,
+          duration: 20,
         }}
-        className="absolute h-[899px] w-[899px] lg:h-[1000px] lg:w-[1000px] border rounded-full border-white/20 border-dashed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 "
+        className="absolute h-[899px] w-[899px] lg:h-[1000px] lg:w-[1000px]  rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 "
       >
         {/* PLANET on the 4th ring */}
-        <div className="absolute h-12 w-12 lg:h-12 lg:w-12  bg-zinc-500 rounded-full top-1/2 left-[764px] lg:left-[830px]">
+        <div className="absolute h-12 w-12 lg:h-12 lg:w-12  bg-zinc-500 rounded-full top-1/2 left-24">
           <img src={pro.src} />
-        </div>
-        <div className="absolute h-12 w-12 lg:h-12 lg:w-12  rounded-full top-32 left-[764px] lg:left-[830px]">
-          <img src={rocket.src} />
         </div>
       </motion.div>
 
@@ -157,7 +156,7 @@ export const Hero = () => {
         </p>
 
         <div className="flex justify-center mt-10">
-          <Button />
+          <GlazeButton />{" "}
         </div>
       </div>
     </motion.section>
