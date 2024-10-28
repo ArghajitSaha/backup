@@ -48,7 +48,7 @@ app.post('/api/tests/:testId/submit', async (req, res) => {
     try {
       const test = await Test.findById(req.params.testId);
       if (!test) return res.status(404).json({ message: 'Test not found' });
-  
+      console.log(test);
       let score = 0;
       test.questions.forEach((question, index) => {
         if (answers[index] === question.CorrectAnswer) {
