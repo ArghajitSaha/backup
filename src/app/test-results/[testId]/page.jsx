@@ -20,10 +20,18 @@ const TestResults = () => {
           axios.get(`http://localhost:5000/api/tests/${testId}/results`)
         ]);
 
+        // Log the test data
+        console.log("Test Data:", testResponse.data);
+        console.log("Test Name:", testResponse.data.test.testName);
+        console.log("Test Questions:", testResponse.data.test.questions);
+        
+        // Log the results data
+        console.log("Results Data:", resultsResponse.data);
+        console.log("Score:", resultsResponse.data.score);
+        console.log("Answers:", resultsResponse.data.answers);
+
         setTest(testResponse.data.test);
-        console.log(testResponse.data);
         setResults(resultsResponse.data);
-        console.log(resultsResponse.data);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching results:', error);
@@ -52,10 +60,24 @@ const TestResults = () => {
   }
 
   const totalQuestions = test.questions.length;
-  const correctAnswers = results.correctAnswers || 0;
+  const correctAnswers = results.answers.filter((answer, index) => 
+    answer.selectedAnswer === test.questions[index].CorrectAnswer
+  ).length;
+
+  // Calculate total marks
   const totalMarks = test.questions.reduce((sum, q) => sum + (q.Marks || 0), 0);
+  
+  // Calculate percentage
   const percentage = ((results.score / totalMarks) * 100).toFixed(2);
   const passingScore = 40;
+
+  // Log calculated values
+  console.log("Total Questions:", totalQuestions);
+  console.log("Correct Answers:", correctAnswers);
+  console.log("Total Marks:", totalMarks);
+  console.log("Score Achieved:", results.score);
+  console.log("Percentage Calculated:", percentage);
+  console.log("Passing Score Threshold:", passingScore);
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -88,9 +110,9 @@ const TestResults = () => {
             <h2 className="text-xl font-semibold mb-4">Question Review</h2>
             
             {test.questions.map((question, index) => {
-              const userAnswer = results.answers[index];
+              const userAnswer = results.answers[index]?.selectedAnswer;
               const isCorrect = userAnswer === question.CorrectAnswer;
-              
+
               return (
                 <div 
                   key={index}
@@ -114,12 +136,12 @@ const TestResults = () => {
                       <div 
                         key={option}
                         className={`p-2 rounded ${
-                          `Option${option}` === userAnswer
+                          option === userAnswer
                             ? isCorrect
-                              ? 'bg-green-200'
-                              : 'bg-red-200'
-                            : `Option${option}` === question.CorrectAnswer
-                              ? 'bg-green-200'
+                              ? 'bg-green-200' // Light green for correct
+                              : 'bg-red-200' // Light red for wrong
+                            : option === question.CorrectAnswer
+                              ? 'bg-green-100' // Light gray for correct option when not selected
                               : 'bg-gray-100'
                         }`}
                       >
