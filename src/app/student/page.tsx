@@ -221,9 +221,9 @@ export default function UserDashboard() {
                         </TableBody>
                       </Table>
                     </div>
-                    <div>
+                    <div className="">
                       <h3 className="text-lg font-semibold mb-2">
-                        Recent Scores
+                        Previous Test
                       </h3>
                       <Table>
                         <TableHeader>
